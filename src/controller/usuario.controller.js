@@ -19,8 +19,8 @@ export const findUserById = async (req, res) => {
 
 export const updateUsuario = async (req,res) => {
   const { id } = req.params;
-  const { username, password } = req.body;
-  const [result] = await consulta.query("UPDATE usuario SET username = IFNULL(?,username), password = IFNULL(?,password) WHERE idCliente = ?", [username, password, id]);
+  const { username, password, idRol } = req.body;
+  const [result] = await consulta.query("UPDATE usuario SET username = IFNULL(?,username), password = IFNULL(?,password), idRol = IFNULL(?,idRol)  WHERE idCliente = ?", [username, password, idRol, id]);
   if(result.affectedRows >= 1){
     const [update] = await consulta.query("SELECT * FROM usuario WHERE idCliente = ?", [id]);
     return res.json(update[0]);

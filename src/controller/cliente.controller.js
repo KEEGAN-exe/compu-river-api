@@ -57,14 +57,24 @@ export const createClient = async (req, res) => {
       email,
       password,
       username,
+      idRol,
     } = req.body;
+
+    console.log(idRol);
+
+    let setRol;
+    if (idRol === undefined || idRol === null || idRol.trim() === "") {
+      setRol = 2;
+    } else {
+      setRol = 1;
+    }
     const [result] = await consulta.query(
       "INSERT INTO cliente (nombre,apellido,direccion,dni,telefono,email) VALUES (?,?,?,?,?,?)",
       [nombre, apellido, direccion, dni, telefono, email]
     );
     await consulta.query(
-      "INSERT INTO usuario (username,password,idCliente) VALUES (?,?,?)",
-      [username, password, result.insertId]
+      "INSERT INTO usuario (username,password,idCliente,idRol) VALUES (?,?,?,?)",
+      [username, password, result.insertId, setRol]
     );
     res.json({
       id: result.insertId,
@@ -75,12 +85,13 @@ export const createClient = async (req, res) => {
       telefono,
       email,
       password,
+      username,
+      setRol,
     });
   } catch (error) {
     console.log(error);
   }
 };
-
 
 export const updateClient = async (req, res) => {
   const { id } = req.params;
