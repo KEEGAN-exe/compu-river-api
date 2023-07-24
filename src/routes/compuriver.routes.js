@@ -10,6 +10,7 @@ import {
   findAllProduct,
   createProduct,
   updateProduct,
+  findProductById,
 } from "../controller/producto.controller.js";
 import {
   createInventory,
@@ -28,6 +29,7 @@ const router = Router();
 router.get("/producto", findAllProduct);
 router.post("/producto", createProduct);
 router.patch("/producto/:id", updateProduct);
+router.get("/producto/:id", findProductById);
 
 // --------------------> CATEGORIA ROUTES <-------------------- //
 

@@ -22,6 +22,12 @@ export const createProduct = async (req, res) => {
   })
 };
 
+export const findProductById = async (req, res) => {
+  const { id } = req.params;
+  const [result] = await consulta.query("SELECT * FROM producto WHERE idProducto = ?", [id]);
+  res.json(result[0]);
+}
+
 // falta  borrar y buscar por id
 
 export const updateProduct = async (req, res) => {
