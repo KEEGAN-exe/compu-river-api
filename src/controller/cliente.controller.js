@@ -37,7 +37,7 @@ export const findClientById = async (req, res) => {
         dni: cliente.dni,
         direccion: cliente.direccion,
         email: cliente.email,
-        username: cliente.user,
+        username: cliente.username,
         contraseña: cliente.contraseña,
         telefono: cliente.telefono,
       };
